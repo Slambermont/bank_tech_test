@@ -25,7 +25,12 @@ describe History do
 
   describe '#display' do
     it 'displays transaction template' do
-      expect(history.display).to eq('date || credit || debit || balance')
+      expect{history.display}.to output("date || credit || debit || balance\n").to_stdout
+    end
+
+    it 'display transaction history after deposit' do
+      history.add_deposit(1000, '18 June 2018', 0)
+      expect{history.display}.to output("date || credit || debit || balance\n18 June 2018 || 1000 ||  || 1000\n").to_stdout
     end
   end
 end
