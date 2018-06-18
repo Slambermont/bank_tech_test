@@ -8,4 +8,11 @@ describe Account do
       expect(account.balance).to eq(0)
     end
   end
+
+  describe '#deposit' do
+    it 'should increase account balance by specified amount' do
+      account.deposit(1000)
+      expect(account.balance).to eq(1000)
+    end
+  end
 end
