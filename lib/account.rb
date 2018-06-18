@@ -7,6 +7,7 @@ class Account
   end
 
   def deposit(amount)
+    @history.add_deposit(amount, @balance)
     @balance += amount
   end
 

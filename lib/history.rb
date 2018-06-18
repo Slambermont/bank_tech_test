@@ -5,14 +5,14 @@ class History
     @data = []
   end
 
-  def add_deposit(amount, date, current_balance)
+  def add_deposit(amount, current_balance, date)
     new_balance = current_balance + amount
-    @data << {date: date, credit: amount, balance: new_balance}
+    @data << { date: date, credit: amount, balance: new_balance }
   end
 
-  def add_withdrawal(amount, date, current_balance)
+  def add_withdrawal(amount, current_balance, date)
     new_balance = current_balance - amount
-    @data << {date: date, debit: amount, balance: new_balance}
+    @data << { date: date, debit: amount, balance: new_balance }
   end
 
   def display
