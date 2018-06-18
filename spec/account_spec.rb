@@ -1,11 +1,17 @@
 require 'account'
 
 describe Account do
-  subject(:account) { Account.new }
+  subject(:account) { Account.new(history_class) }
+  let(:history_class) { double :history_class, new: history }
+  let(:history) { double :history }
 
   describe '#initialize' do
     it 'should initialize a balance of zero' do
       expect(account.balance).to eq(0)
+    end
+
+    it 'should initialize an instance of History' do
+      expect(account.history).to eq(history)
     end
   end
 
