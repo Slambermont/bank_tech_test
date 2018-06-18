@@ -15,4 +15,8 @@ class Account
     @history.add_withdrawal(amount, @balance)
     @balance -= amount
   end
+
+  def show_transactions
+    @history.display
+  end
 end

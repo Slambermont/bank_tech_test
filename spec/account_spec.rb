@@ -40,4 +40,11 @@ describe Account do
       account.withdraw(300)
     end
   end
+
+  describe '#show_transactions' do
+    it 'calls display on account history' do
+      expect(history).to receive(:display)
+      account.show_transactions
+    end
+  end
 end
