@@ -5,12 +5,12 @@ class History
     @data = []
   end
 
-  def add_deposit(amount, current_balance, date)
+  def add_deposit(amount, current_balance, date = current_date)
     new_balance = current_balance + amount
     @data << { date: date, credit: amount, balance: new_balance }
   end
 
-  def add_withdrawal(amount, current_balance, date)
+  def add_withdrawal(amount, current_balance, date = current_date)
     new_balance = current_balance - amount
     @data << { date: date, debit: amount, balance: new_balance }
   end
@@ -20,5 +20,11 @@ class History
     @data.each do |x|
       puts "#{x[:date]} || #{x[:credit]} || #{x[:debit]} || #{x[:balance]}"
     end
+  end
+
+  private
+
+  def current_date
+    Time.now.strftime("%d/%m/%Y")
   end
 end
