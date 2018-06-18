@@ -16,6 +16,13 @@ describe History do
     end
   end
 
+  describe '#add_withdrawal' do
+    it 'should add transaction info to history data' do
+      history.add_withdrawal(300, '18 June 2018', 1000)
+      expect(history.data).to eq([{date: '18 June 2018', debit: 300, balance: 700}])
+    end
+  end
+
   describe '#display' do
     it 'displays transaction template' do
       expect(history.display).to eq('date || credit || debit || balance')

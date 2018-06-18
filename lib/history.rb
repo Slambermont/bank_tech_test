@@ -10,6 +10,11 @@ class History
     @data << {date: date, credit: amount, balance: new_balance}
   end
 
+  def add_withdrawal(amount, date, current_balance)
+    new_balance = current_balance - amount
+    @data << {date: date, debit: amount, balance: new_balance}
+  end
+
   def display
     'date || credit || debit || balance'
   end
