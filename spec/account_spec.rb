@@ -3,7 +3,7 @@ require 'account'
 describe Account do
   subject(:account) { Account.new(history_class) }
   let(:history_class) { double :history_class, new: history }
-  let(:history) { double :history, add_deposit: nil }
+  let(:history) { double :history, add_deposit: nil, add_withdrawal: nil }
 
   describe '#initialize' do
     it 'should initialize a balance of zero' do
@@ -32,6 +32,12 @@ describe Account do
       account.deposit(1000)
       account.withdraw(300)
       expect(account.balance).to eq(700)
+    end
+
+    it 'should record transaction in history' do
+      account.deposit(1000)
+      expect(history).to receive(:add_withdrawal).with(300, 1000)
+      account.withdraw(300)
     end
   end
 end

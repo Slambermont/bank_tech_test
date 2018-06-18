@@ -12,6 +12,7 @@ class Account
   end
 
   def withdraw(amount)
+    @history.add_withdrawal(amount, @balance)
     @balance -= amount
   end
 end
