@@ -1,3 +1,5 @@
+require_relative 'history'
+
 class Account
   attr_reader :balance, :history
 
