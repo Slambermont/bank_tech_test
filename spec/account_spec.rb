@@ -39,6 +39,11 @@ describe Account do
       expect(history).to receive(:add_withdrawal).with(300, 1000)
       account.withdraw(300)
     end
+
+    it 'should raise an error if balance is too low' do
+      account.deposit(200)
+      expect { account.withdraw(500) }.to raise_error 'Balance is too low' 
+    end
   end
 
   describe '#show_transactions' do

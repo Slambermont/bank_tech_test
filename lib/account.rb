@@ -14,6 +14,7 @@ class Account
   end
 
   def withdraw(amount)
+    raise 'Balance is too low' if amount > @balance
     @history.add_withdrawal(amount, @balance)
     @balance -= amount
   end
