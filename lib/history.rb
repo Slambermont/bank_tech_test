@@ -5,6 +5,11 @@ class History
     @data = []
   end
 
+  def add_deposit(amount, date, current_balance)
+    new_balance = current_balance + amount
+    @data << {date: date, credit: amount, balance: new_balance}
+  end
+
   def display
     'date || credit || debit || balance'
   end
