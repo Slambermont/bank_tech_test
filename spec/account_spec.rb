@@ -3,7 +3,7 @@ require 'account'
 describe Account do
   subject(:account) { Account.new(history_class) }
   let(:history_class) { double :history_class, new: history }
-  let(:history) { double :history, add_deposit: nil, add_withdrawal: nil }
+  let(:history) { double :history, add_deposit: nil, add_withdrawal: nil, display: nil }
 
   describe '#initialize' do
     it 'should initialize a balance of zero' do
@@ -47,6 +47,10 @@ describe Account do
   end
 
   describe '#show_transactions' do
+    it 'displays transaction template' do
+      expect { account.show_transactions }.to output("date || credit || debit || balance\n").to_stdout
+    end
+
     it 'calls display on account history' do
       expect(history).to receive(:display)
       account.show_transactions

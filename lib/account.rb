@@ -20,6 +20,7 @@ class Account
   end
 
   def show_transactions
-    @history.display
+    puts "date || credit || debit || balance"
+    puts @history.display.join("\n") if @history.display != nil
   end
 end
