@@ -25,7 +25,7 @@ class History
 
   def display
     puts "date || credit || debit || balance"
-    @data.each do |x|
+    @data.reverse_each do |x|
       puts "#{x[:date]} || #{x[:credit]} || #{x[:debit]} || #{x[:balance]}"
     end
   end

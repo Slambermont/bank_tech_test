@@ -4,10 +4,6 @@ require 'timecop'
 describe History do
   subject(:history) { History.new }
 
-  before do
-    Timecop.freeze(Time.local(2018, 06, 18))
-  end
-
   describe '#initialize' do
     it 'initializes a empty history' do
       expect(history.data).to eq([])
@@ -16,15 +12,17 @@ describe History do
 
   describe '#add_deposit' do
     it 'should add transaction info to history data' do
+      Timecop.freeze(Time.local(2012, 01, 10))
       history.add_deposit(1000, 0)
-      expect(history.data).to eq([{ date: '18/06/2018', credit: '1000.00', balance: '1000.00' }])
+      expect(history.data).to eq([{ date: '10/01/2012', credit: '1000.00', balance: '1000.00' }])
     end
   end
 
   describe '#add_withdrawal' do
     it 'should add transaction info to history data' do
-      history.add_withdrawal(300, 1000)
-      expect(history.data).to eq([{ date: '18/06/2018', debit: '300.00', balance: '700.00' }])
+      Timecop.freeze(Time.local(2012, 01, 14))
+      history.add_withdrawal(500, 3000)
+      expect(history.data).to eq([{ date: '14/01/2012', debit: '500.00', balance: '2500.00' }])
     end
   end
 
@@ -34,13 +32,20 @@ describe History do
     end
 
     it 'display transaction history after deposit' do
+      Timecop.freeze(Time.local(2012, 01, 10))
       history.add_deposit(1000, 0)
-      expect { history.display }.to output("date || credit || debit || balance\n18/06/2018 || 1000.00 ||  || 1000.00\n").to_stdout
+      expect { history.display }.to output("date || credit || debit || balance\n10/01/2012 || 1000.00 ||  || 1000.00\n").to_stdout
     end
 
     it 'display transaction history after withdrawal' do
-      history.add_withdrawal(300, 1000)
-      expect { history.display }.to output("date || credit || debit || balance\n18/06/2018 ||  || 300.00 || 700.00\n").to_stdout
+      Timecop.freeze(Time.local(2012, 01, 10))
+      history.add_deposit(1000, 0)
+      Timecop.freeze(Time.local(2012, 01, 13))
+      history.add_deposit(2000, 1000)
+      Timecop.freeze(Time.local(2012, 01, 14))
+      history.add_withdrawal(500, 3000)
+      expect { history.display }.to output(
+        "date || credit || debit || balance\n14/01/2012 ||  || 500.00 || 2500.00\n13/01/2012 || 2000.00 ||  || 3000.00\n10/01/2012 || 1000.00 ||  || 1000.00\n").to_stdout
     end
   end
 end
