@@ -14,6 +14,8 @@ Withdraw a certain amount ```account.withdraw(500)```
 
 And display your transaction history. ```account.show_transactions```
 
+![Alt text](./screenshot.png)
+
 
 ## Approach
 
