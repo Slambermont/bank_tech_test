@@ -1,5 +1,7 @@
 # Bank Tech Test
 
+A small command line application that simulates a bank account.
+
 ## Running instructions
 
 1. Clone this repository
@@ -16,8 +18,7 @@ And display your transaction history. ```account.show_transactions```
 
 ![Alt text](./screenshot.png)
 
-
-## Approach
+## Approach
 
 When designing the program with the specifications and OOD principles in mind, I saw 2 distinct responsibilities. One part of the program (the Account class) should be responsible for interacting with the customer and handling their requests and balance, and the other (the History class) to store and display the transaction history. The Account methods would communicate with the History class to store whatever request was made.
 
