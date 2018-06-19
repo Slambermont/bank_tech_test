@@ -22,7 +22,7 @@ describe Account do
     end
 
     it 'should record transaction in history' do
-      expect(history).to receive(:add_deposit).with(1000, 0)
+      expect(history).to receive(:add_deposit).with(1000, 1000)
       account.deposit(1000)
     end
   end
@@ -36,13 +36,13 @@ describe Account do
 
     it 'should record transaction in history' do
       account.deposit(1000)
-      expect(history).to receive(:add_withdrawal).with(300, 1000)
+      expect(history).to receive(:add_withdrawal).with(300, 700)
       account.withdraw(300)
     end
 
     it 'should raise an error if balance is too low' do
       account.deposit(200)
-      expect { account.withdraw(500) }.to raise_error 'Balance is too low' 
+      expect { account.withdraw(500) }.to raise_error 'Balance is too low'
     end
   end
 

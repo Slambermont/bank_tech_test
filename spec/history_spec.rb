@@ -13,7 +13,7 @@ describe History do
   describe '#add_deposit' do
     it 'should add transaction info to history data' do
       Timecop.freeze(Time.local(2012, 01, 10))
-      history.add_deposit(1000, 0)
+      history.add_deposit(1000, 1000)
       expect(history.data).to eq([{ date: '10/01/2012', credit: '1000.00', balance: '1000.00' }])
     end
   end
@@ -21,7 +21,7 @@ describe History do
   describe '#add_withdrawal' do
     it 'should add transaction info to history data' do
       Timecop.freeze(Time.local(2012, 01, 14))
-      history.add_withdrawal(500, 3000)
+      history.add_withdrawal(500, 2500)
       expect(history.data).to eq([{ date: '14/01/2012', debit: '500.00', balance: '2500.00' }])
     end
   end
@@ -33,17 +33,17 @@ describe History do
 
     it 'display transaction history after deposit' do
       Timecop.freeze(Time.local(2012, 01, 10))
-      history.add_deposit(1000, 0)
+      history.add_deposit(1000, 1000)
       expect { history.display }.to output("date || credit || debit || balance\n10/01/2012 || 1000.00 ||  || 1000.00\n").to_stdout
     end
 
     it 'display transaction history after withdrawal' do
       Timecop.freeze(Time.local(2012, 01, 10))
-      history.add_deposit(1000, 0)
+      history.add_deposit(1000, 1000)
       Timecop.freeze(Time.local(2012, 01, 13))
-      history.add_deposit(2000, 1000)
+      history.add_deposit(2000, 3000)
       Timecop.freeze(Time.local(2012, 01, 14))
-      history.add_withdrawal(500, 3000)
+      history.add_withdrawal(500, 2500)
       expect { history.display }.to output("date || credit || debit || balance\n14/01/2012 ||  || 500.00 || 2500.00\n13/01/2012 || 2000.00 ||  || 3000.00\n10/01/2012 || 1000.00 ||  || 1000.00\n").to_stdout
     end
   end

@@ -9,13 +9,13 @@ class Account
   end
 
   def deposit(amount)
-    @history.add_deposit(amount, @balance)
+    @history.add_deposit(amount, @balance + amount)
     @balance += amount
   end
 
   def withdraw(amount)
     raise 'Balance is too low' if amount > @balance
-    @history.add_withdrawal(amount, @balance)
+    @history.add_withdrawal(amount, @balance - amount)
     @balance -= amount
   end
 
